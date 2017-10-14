@@ -320,7 +320,7 @@ This program is free software under [MIT][mit-url] License.
 See the file LICENSE in this distribution for more details.
 
 [repo-url]: https://github.com/sttk/fav-type.to-date/
-[npm-img]: https://img.shields.io/badge/npm-v0.6.2-blue.svg
+[npm-img]: https://img.shields.io/badge/npm-v0.7.0-blue.svg
 [npm-url]: https://www.npmjs.com/package/@fav/type.to-date
 [mit-img]: https://img.shields.io/badge/license-MIT-green.svg
 [mit-url]: https://opensource.org/licenses/MIT
