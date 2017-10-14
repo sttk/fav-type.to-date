@@ -1,0 +1,57 @@
+{
+  "name": "@fav/type.to-date",
+  "version": "0.6.2",
+  "description": "Convert a string in various date format to a date object.",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "scripts": {
+    "lint": "eslint src test",
+    "test": "mocha",
+    "coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
+    "coveralls": "nyc --reporter=text-lcov npm test | coveralls",
+    "web:build": "npm run web:build-src && npm run web:build-test",
+    "web:build-src": "browserify index.js --standalone fav.type.to-date -o web/fav.type.to-date.js && cd web && uglifyjs fav.type.to-date.js --compress --mangle -o fav.type.to-date.min.js --source-map url=fav.type.to-date.min.js.map",
+    "web:build-test": "node tool/mktest.js",
+    "chrome:install": "npm i --no-save mocha-chrome",
+    "chrome:test": "mocha-chrome test/web/browser-test.html",
+    "phantom:install": "npm i --no-save phantomjs-prebuilt mocha-phantomjs",
+    "phantom:test": "mocha-phantomjs -p node_modules/.bin/phantomjs test/web/browser-test.html",
+    "build": "npm run lint && npm run coverage && npm run web:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sttk/fav-type.to-date.git"
+  },
+  "keywords": [
+    "date",
+    "rfc2822",
+    "rfc3339",
+    "iso8601",
+    "to-date",
+    "type",
+    "datatype",
+    "fav"
+  ],
+  "author": "Takayuki Sato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sttk/fav-type.to-date/issues"
+  },
+  "homepage": "https://github.com/sttk/fav-type.to-date#readme",
+  "dependencies": {
+    "@fav/type.is-string": "^0.6.0",
+    "@fav/type.is-valid-date": "^0.8.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "chai": "^3.5.0",
+    "coveralls": "^2.13.1",
+    "eslint": "^4.8.0",
+    "mocha": "^3.5.3",
+    "nyc": "^11.2.1",
+    "uglify-js": "^3.1.3"
+  }
+}
