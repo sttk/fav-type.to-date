@@ -4,6 +4,8 @@ var chai = require('chai');
 var expect = chai.expect;
 var fav = {}; fav.type = {}; fav.type.toDate = require('..');
 
+var isPhantomJs = require('./tool/env').isPhantomJs;
+
 var newDate = fav.type.toDate;
 var toDate = fav.type.toDate['Y/M/D H:m:s'];
 
@@ -44,7 +46,9 @@ describe('fav.type.toDate["Y/M/D H:m:s"]', function() {
     expect(toDate('20170921223311')).to.equal(null);
     expect(toDate('２０１７/９/２１ １１:２２:３３')).to.equal(null);
     expect(toDate('2017-09-21 11:22:33')).to.equal(null);
-    expect(toDate('9999999/09/21 11:22:33')).to.equal(null);
+    if (!isPhantomJs()) {
+      expect(toDate('9999999/09/21 11:22:33')).to.equal(null);
+    }
   });
 
   it('Should return null if value is illegal data type', function() {

@@ -6,11 +6,13 @@ var concatFile = require('./lib/concat-file');
 
 var path = require('path');
 var srcdir = path.resolve(__dirname, '../test');
+var tooldir = path.resolve(__dirname, '../test/tool');
 var outdir = path.resolve(__dirname, '../test/web');
 var outfile = path.resolve(outdir, 'browser-test.js');
 
 truncFile(outfile);
 listFiles(srcdir, '.test.js').forEach(bundleFile);
+listFiles(tooldir, '.js').forEach(bundleFile);
 
 function bundleFile (filepath) {
   return concatFile(filepath, outfile, function(data) {

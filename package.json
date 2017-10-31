@@ -47,6 +47,7 @@
     "@fav/type.is-valid-date": "^0.8.0"
   },
   "devDependencies": {
+    "@xslet/platform": "^0.1.5",
     "browserify": "^14.4.0",
     "chai": "^3.5.0",
     "coveralls": "^2.13.1",

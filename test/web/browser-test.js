@@ -5,6 +5,8 @@
 var expect = chai.expect;
 
 
+
+
 var newDate = fav.type.toDate;
 var toDate = newDate['Y-M-D H:m:s'];
 
@@ -45,7 +47,9 @@ describe('fav.type.toDate["Y-M-D H:m:s"]', function() {
     expect(toDate('20170921223311')).to.equal(null);
     expect(toDate('２０１７-９-２１ １１:２２:３３')).to.equal(null);
     expect(toDate('2017/09/21 11:22:33')).to.equal(null);
-    expect(toDate('9999999-09-21 11:22:33')).to.equal(null);
+    if (!isPhantomJs()) {
+      expect(toDate('9999999-09-21 11:22:33')).to.equal(null);
+    }
   });
 
   it('Should return null if value is illegal data type', function() {
@@ -71,12 +75,15 @@ describe('fav.type.toDate["Y-M-D H:m:s"]', function() {
 
 });
 
+
 })();
 (function(){
 'use strict';
 
 
 var expect = chai.expect;
+
+
 
 
 var newDate = fav.type.toDate;
@@ -105,7 +112,9 @@ describe('fav.type.toDate["Y-M-D"]', function() {
     expect(toDate('２０１７-９-２１')).to.equal(null);
     expect(toDate('2017-09-31-')).to.equal(null);
     expect(toDate('2017/09/21')).to.equal(null);
-    expect(toDate('9999999-09-21')).to.equal(null);
+    if (!isPhantomJs()) {
+      expect(toDate('9999999-09-21')).to.equal(null);
+    }
   });
 
   it('Should return null if value is illegal data type', function() {
@@ -680,6 +689,8 @@ describe('fav.type.toDate["RFC3339"]', function() {
 var expect = chai.expect;
 
 
+
+
 var newDate = fav.type.toDate;
 var toDate = fav.type.toDate['Y/M/D H:m:s'];
 
@@ -720,7 +731,9 @@ describe('fav.type.toDate["Y/M/D H:m:s"]', function() {
     expect(toDate('20170921223311')).to.equal(null);
     expect(toDate('２０１７/９/２１ １１:２２:３３')).to.equal(null);
     expect(toDate('2017-09-21 11:22:33')).to.equal(null);
-    expect(toDate('9999999/09/21 11:22:33')).to.equal(null);
+    if (!isPhantomJs()) {
+      expect(toDate('9999999/09/21 11:22:33')).to.equal(null);
+    }
   });
 
   it('Should return null if value is illegal data type', function() {
@@ -754,6 +767,8 @@ describe('fav.type.toDate["Y/M/D H:m:s"]', function() {
 var expect = chai.expect;
 
 
+
+
 var newDate = fav.type.toDate;
 var toDate = fav.type.toDate['Y/M/D'];
 
@@ -780,7 +795,9 @@ describe('fav.type.toDate["Y/M/D"]', function() {
     expect(toDate('２０１７/９/２１')).to.equal(null);
     expect(toDate('2017/09/31/')).to.equal(null);
     expect(toDate('2017-09-21')).to.equal(null);
-    expect(toDate('9999999/09/21')).to.equal(null);
+    if (!isPhantomJs()) {
+      expect(toDate('9999999/09/21')).to.equal(null);
+    }
   });
 
   it('Should return null if value is illegal data type', function() {
@@ -1214,5 +1231,25 @@ describe('fav.type.toDate', function() {
   });
 
 });
+
+})();
+(function(){
+'use strict';
+
+function isPhantomJs() {
+  if (typeof xslet !== 'undefined' && typeof xslet.platform !== 'undefined') {
+    var ua = xslet.platform.ua;
+    if (ua.PHANTOMJS) {
+      return true;
+    }
+  }
+  return false;
+}
+
+if (typeof window !== 'undefined') {
+  window.isPhantomJs = isPhantomJs;
+} else if (typeof module !== 'undefined') {
+  module.exports.isPhantomJs = isPhantomJs;
+}
 
 })();
