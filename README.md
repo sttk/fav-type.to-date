@@ -22,6 +22,9 @@ For Node.js, when installing `@fav/type.to-date` from npm:
 
 ```js
 var toDate = require('@fav/type.to-date');
+
+toDate(99, 0, 1).toString(); // => 'Thu Jan 01 0099 00:00:00 GMT+0900 (JST)'
+
 toDate['Y-M-D']('2017-09-30'); // => new Date(2017, 8, 30)
 toDate.YYYYMMDDHHmmss('20170930133000'); // => new Date(2017, 8, 30, 13, 30, 0)
 toDate.RFC2822('Sat, 30 Sep 2017 13:30:00 +0900'); // => new Date(2017, 8, 30, 13, 30, 0) at Japan
@@ -35,16 +38,39 @@ For Web browsers:
 <script src="fav.type.to-date.min.js"></script>
 <script>
 var toDate = fav.type.toDate;
+toDate(99, 0, 1).toString(); // => 'Thu Jan 01 0099 00:00:00 GMT+0900 (JST)'
 toDate['Y-M-D']('2017-09-30'); // => new Date(2017, 8, 30)
 </script>
 ```
 
 ## API
 
-### <u>toDate : object</u>
+### <u>toDate([ year ][, month ][, day ][, hour ][, min ][, sec ][, msec ])  : Date</u>
 
-Is a set of functions to convert a date format string to a date object.
+Creates a Date object which represents a moment in time.
 
+#### Parameters:
+
+| Parameter |  Type  | Description                              |
+|-----------|:------:|------------------------------------------|
+| year      | number | An integer value represents a full year. This can be specified a year before 1900. (Optional) |
+| month     | number | An integer value represents a month, beginning with 0 for January to 11 for December. (Optional) |
+| day       | number | An integer value represents a day. (Optional) |
+| hour      | number | An integer value represents a hour. (Optional) |
+| min       | number | An integer value represents a minute. (Optional) |
+| sec       | number | An integer value represents a second. (Optional.) |
+| msec      | number | An integer value represents a millisecond. (Optional.) | 
+
+Each element of date and time is set to the first value (zero, or one) if any leading elements are specified but the element is not specified, or is set to the current value if every leading elements and the element are not specified.
+
+#### Returns:
+
+A date object which represents the specified date.
+
+**Type:** Date
+
+
+In addition, this function has a set of functions to convert a date format string to a date object as its properties.
 This function set provides functions supporting following date formats:
 
 - [Y-M-D](#hyphened_ymd)

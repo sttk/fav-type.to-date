@@ -1,6 +1,7 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g=(g.fav||(g.fav = {}));g=(g.type||(g.type = {}));g.toDate = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+var newDate = require('./lib/new-date');
 var fromHyphenedYmd = require('./lib/from-hyphened-ymd');
 var fromHyphenedYmdAndHms = require('./lib/from-hyphened-ymd-and-hms');
 var fromSlashedYmd = require('./lib/from-slashed-ymd');
@@ -13,7 +14,7 @@ var fromRfc2822 = require('./lib/from-rfc2822');
 var fromRfc3339 = require('./lib/from-rfc3339');
 var fromIso8601 = require('./lib/from-iso8601');
 
-var toDate = {};
+var toDate = newDate;
 
 Object.defineProperties(toDate, {
   'Y-M-D': { enumerable: true, value: fromHyphenedYmd },
@@ -31,11 +32,13 @@ Object.defineProperties(toDate, {
 
 module.exports = toDate;
 
-},{"./lib/from-hyphened-ymd":3,"./lib/from-hyphened-ymd-and-hms":2,"./lib/from-iso8601":4,"./lib/from-rfc2822":5,"./lib/from-rfc3339":6,"./lib/from-slashed-ymd":8,"./lib/from-slashed-ymd-and-hms":7,"./lib/from-yymmdd":9,"./lib/from-yymmddhhmmss":10,"./lib/from-yyyymmdd":11,"./lib/from-yyyymmddhhmmss":12}],2:[function(require,module,exports){
+},{"./lib/from-hyphened-ymd":3,"./lib/from-hyphened-ymd-and-hms":2,"./lib/from-iso8601":4,"./lib/from-rfc2822":5,"./lib/from-rfc3339":6,"./lib/from-slashed-ymd":8,"./lib/from-slashed-ymd-and-hms":7,"./lib/from-yymmdd":9,"./lib/from-yymmddhhmmss":10,"./lib/from-yyyymmdd":11,"./lib/from-yyyymmddhhmmss":12,"./lib/new-date":13}],2:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromHyphenedYmdAndHms(text) {
   if (!isString(text)) {
@@ -61,17 +64,19 @@ function fromHyphenedYmdAndHms(text) {
     millis = 0;
   }
 
-  var date = new Date(year, month - 1, day, hour, minute, second, millis);
+  var date = newDate(year, month - 1, day, hour, minute, second, millis);
   return isValidDate(date) ? date : null;
 }
 
 module.exports = fromHyphenedYmdAndHms;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],3:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],3:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromHyphenedYmd(text) {
   if (!isString(text)) {
@@ -87,17 +92,19 @@ function fromHyphenedYmd(text) {
   var month = parseInt(result[2], 10);
   var day = parseInt(result[3], 10);
 
-  var date = new Date(year, month - 1, day);
+  var date = newDate(year, month - 1, day);
   return isValidDate(date) ? date : null;
 }
 
 module.exports = fromHyphenedYmd;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],4:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],4:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromIso8601(text) {
   if (!isString(text)) {
@@ -141,7 +148,7 @@ function fromIso8601(text) {
 
 /* time = [hour, minute, second], zone = [zone, sign, hour, minute] */
 function parseBasicZone(time, zone) {
-  var tz = new Date().getTimezoneOffset();
+  var tz = newDate().getTimezoneOffset();
   var tzMinute = tz % 60;
   var tzHour = (tz - tzMinute) / 60;
 
@@ -158,7 +165,7 @@ function parseBasicZone(time, zone) {
   }
 }
 function parseExtendedZone(time, zone) {
-  var tz = new Date().getTimezoneOffset();
+  var tz = newDate().getTimezoneOffset();
   var tzMinute = tz % 60;
   var tzHour = (tz - tzMinute) / 60;
 
@@ -198,7 +205,7 @@ function fromExtendedCalendarDate(text) {
     }
   }
 
-  var date = new Date(ymd[0], ymd[1] - 1, ymd[2], tms[0], tms[1], tms[2]);
+  var date = newDate(ymd[0], ymd[1] - 1, ymd[2], tms[0], tms[1], tms[2]);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -228,7 +235,7 @@ function fromExtendedOrdinalDate(text) {
     }
   }
 
-  var date = new Date(yd[0], 0, yd[1], tms[0], tms[1], tms[2]);
+  var date = newDate(yd[0], 0, yd[1], tms[0], tms[1], tms[2]);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -259,10 +266,10 @@ function fromExtendedWeekDate(text) {
     }
   }
 
-  var firstWeek = new Date(ywd[0], 0, 1).getDay();
+  var firstWeek = newDate(ywd[0], 0, 1).getDay();
   var day = (ywd[1] - 1) * 7 + ywd[2] - firstWeek + 1;
 
-  var date = new Date(ywd[0], 0, day, tms[0], tms[1], tms[2]);
+  var date = newDate(ywd[0], 0, day, tms[0], tms[1], tms[2]);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -293,7 +300,7 @@ function fromBasicCalendarDate(text) {
     }
   }
 
-  var date = new Date(ymd[0], ymd[1] - 1, ymd[2], tms[0], tms[1], tms[2]);
+  var date = newDate(ymd[0], ymd[1] - 1, ymd[2], tms[0], tms[1], tms[2]);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -323,7 +330,7 @@ function fromBasicOrdinalDate(text) {
     }
   }
 
-  var date = new Date(yd[0], 0, yd[1], tms[0], tms[1], tms[2]);
+  var date = newDate(yd[0], 0, yd[1], tms[0], tms[1], tms[2]);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -354,10 +361,10 @@ function fromBasicWeekDate(text) {
     }
   }
 
-  var firstWeek = new Date(ywd[0], 0, 1).getDay();
+  var firstWeek = newDate(ywd[0], 0, 1).getDay();
   var day = (ywd[1] - 1) * 7 + ywd[2] - firstWeek + 1;
 
-  var date = new Date(ywd[0], 0, day, tms[0], tms[1], tms[2]);
+  var date = newDate(ywd[0], 0, day, tms[0], tms[1], tms[2]);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -367,7 +374,7 @@ function fromBasicWeekDate(text) {
 
 module.exports = fromIso8601;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],5:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],5:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
@@ -425,11 +432,13 @@ function fromRfc2822(text) {
 
 module.exports = fromRfc2822;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],6:[function(require,module,exports){
+},{"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],6:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromRfc3339(text) {
   if (!isString(text)) {
@@ -466,13 +475,13 @@ function fromRfc3339(text) {
     minute -= parseInt(result[11], 10) * zoneSign;
   }
 
-  var tz = new Date().getTimezoneOffset();
+  var tz = newDate().getTimezoneOffset();
   var tzMinute = tz % 60;
   var tzHour = (tz - tzMinute) / 60;
   hour -= tzHour;
   minute -= tzMinute;
 
-  var date = new Date(year, month - 1, day, hour, minute, second, millis);
+  var date = newDate(year, month - 1, day, hour, minute, second, millis);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -482,11 +491,13 @@ function fromRfc3339(text) {
 
 module.exports = fromRfc3339;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],7:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],7:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromHyphenedYmdAndHms(text) {
   if (!isString(text)) {
@@ -513,17 +524,19 @@ function fromHyphenedYmdAndHms(text) {
     millis = 0;
   }
 
-  var date = new Date(year, month - 1, day, hour, minute, second, millis);
+  var date = newDate(year, month - 1, day, hour, minute, second, millis);
   return isValidDate(date) ? date : null;
 }
 
 module.exports = fromHyphenedYmdAndHms;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],8:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],8:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromSlashedYmd(text) {
   if (!isString(text)) {
@@ -540,17 +553,19 @@ function fromSlashedYmd(text) {
   var month = parseInt(result[2], 10);
   var day = parseInt(result[3], 10);
 
-  var date = new Date(year, month - 1, day);
+  var date = newDate(year, month - 1, day);
   return isValidDate(date) ? date : null;
 }
 
 module.exports = fromSlashedYmd;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],9:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],9:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromYymmdd(text) {
   if (!isString(text)) {
@@ -567,13 +582,13 @@ function fromYymmdd(text) {
   var month = parseInt(result[2], 10);
   var day = parseInt(result[3], 10);
 
-  var currentYear = new Date().getFullYear();
+  var currentYear = newDate().getFullYear();
   year = currentYear - (currentYear % 100) + year;
   if (year >= currentYear + 50) {
     year -= 100;
   }
 
-  var date = new Date(year, month - 1, day);
+  var date = newDate(year, month - 1, day);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -583,11 +598,13 @@ function fromYymmdd(text) {
 
 module.exports = fromYymmdd;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],10:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],10:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromYymmddhhmmss(text) {
   if (!isString(text)) {
@@ -607,13 +624,13 @@ function fromYymmddhhmmss(text) {
   var minute = parseInt(result[5], 10);
   var second = parseInt(result[6], 10);
 
-  var currentYear = new Date().getFullYear();
+  var currentYear = newDate().getFullYear();
   year = currentYear - (currentYear % 100) + year;
   if (year >= currentYear + 50) {
     year -= 100;
   }
 
-  var date = new Date(year, month - 1, day, hour, minute, second);
+  var date = newDate(year, month - 1, day, hour, minute, second);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -623,11 +640,13 @@ function fromYymmddhhmmss(text) {
 
 module.exports = fromYymmddhhmmss;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],11:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],11:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromYyyymmdd(text) {
   if (!isString(text)) {
@@ -644,7 +663,7 @@ function fromYyyymmdd(text) {
   var month = parseInt(result[2], 10);
   var day = parseInt(result[3], 10);
 
-  var date = new Date(year, month - 1, day);
+  var date = newDate(year, month - 1, day);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -654,11 +673,13 @@ function fromYyyymmdd(text) {
 
 module.exports = fromYyyymmdd;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],12:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],12:[function(require,module,exports){
 'use strict';
 
 var isString = require('@fav/type.is-string');
 var isValidDate = require('@fav/type.is-valid-date');
+
+var newDate = require('./new-date');
 
 function fromYyyymmddhhmmss(text) {
   if (!isString(text)) {
@@ -678,7 +699,7 @@ function fromYyyymmddhhmmss(text) {
   var minute = parseInt(result[5], 10);
   var second = parseInt(result[6], 10);
 
-  var date = new Date(year, month - 1, day, hour, minute, second);
+  var date = newDate(year, month - 1, day, hour, minute, second);
   /* istanbul ignore if */
   if (!isValidDate(date)) {
     return null;
@@ -688,7 +709,86 @@ function fromYyyymmddhhmmss(text) {
 
 module.exports = fromYyyymmddhhmmss;
 
-},{"@fav/type.is-string":13,"@fav/type.is-valid-date":14}],13:[function(require,module,exports){
+},{"./new-date":13,"@fav/type.is-string":14,"@fav/type.is-valid-date":15}],13:[function(require,module,exports){
+'use strict';
+
+function setDate(now, year, month, day, hour, min, sec, msec) {
+  var existsLeadingElements = false;
+
+  if (year != null) {
+    existsLeadingElements = true;
+  } else {
+    year = now.getFullYear();
+  }
+
+  if (month != null) {
+    existsLeadingElements = true;
+  } else if (existsLeadingElements) {
+    month = 0;
+  } else {
+    month = now.getMonth();
+  }
+
+  if (day != null) {
+    existsLeadingElements = true;
+  } else if (existsLeadingElements) {
+    day = 1;
+  } else {
+    day = now.getDate();
+  }
+
+  if (hour != null) {
+    existsLeadingElements = true;
+  } else if (existsLeadingElements) {
+    hour = 0;
+  } else {
+    hour = now.getHours();
+  }
+
+  if (min != null) {
+    existsLeadingElements = true;
+  } else if (existsLeadingElements) {
+    min = 0;
+  } else {
+    min = now.getMinutes();
+  }
+
+  if (sec != null) {
+    existsLeadingElements = true;
+  } else if (existsLeadingElements) {
+    sec = 0;
+  } else {
+    sec = now.getSeconds();
+  }
+
+  if (msec != null) {
+    existsLeadingElements = true;
+  } else if (existsLeadingElements) {
+    msec = 0;
+  } else {
+    msec = now.getMilliseconds();
+  }
+
+  var date = new Date(0);
+  date.setFullYear(year);
+  date.setMonth(month);
+  date.setDate(day);
+  date.setHours(hour);
+  date.setMinutes(min);
+  date.setSeconds(sec);
+  date.setMilliseconds(msec);
+  return date;
+}
+
+function newDate(year, month, day, hour, min, sec, msec) {
+  return setDate(new Date(), year, month, day, hour, min, sec, msec);
+}
+
+newDate.setDate = setDate;
+
+module.exports = newDate;
+
+},{}],14:[function(require,module,exports){
 'use strict';
 
 function isString(value) {
@@ -703,7 +803,7 @@ function isString(value) {
 
 module.exports = isString;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 function isValidDate(value) {

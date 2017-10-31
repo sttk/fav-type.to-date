@@ -4,9 +4,10 @@ var chai = require('chai');
 var expect = chai.expect;
 var fav = {}; fav.type = {}; fav.type.toDate = require('..');
 
-var toDate = fav.type.toDate.RFC2822;
+var newDate = fav.type.toDate;
+var toDate = newDate.RFC2822;
 
-var tz = new Date().getTimezoneOffset();
+var tz = newDate().getTimezoneOffset();
 var tzM = tz % 60;
 var tzH = (tz - tzM) / 60;
 
@@ -14,58 +15,58 @@ describe('fav.type.toDate["RFC2822"]', function() {
 
   it('Should return a date object if value is normal', function() {
     expect(toDate('Tue, 25 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 25, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 25, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Tue, 26 Sep 2017 08:15:02 +0900'))
-      .to.eql(new Date(2017, 8, 26, 8 - tzH - 9, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 26, 8 - tzH - 9, 15 - tzM, 2, 0));
     expect(toDate('Tue, 26 Sep 2017 08:15:02 -0900'))
-      .to.eql(new Date(2017, 8, 26, 8 - tzH + 9, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 26, 8 - tzH + 9, 15 - tzM, 2, 0));
     expect(toDate('  26  Sep  2017  08:15:02   +0900  '))
-      .to.eql(new Date(2017, 8, 26, 8 - tzH - 9, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 26, 8 - tzH - 9, 15 - tzM, 2, 0));
 
     expect(toDate('Mon, 24 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 24, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 24, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Tue, 25 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 25, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 25, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Wed, 26 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 26, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 26, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Thu, 27 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 27, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 27, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Fri, 28 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 28, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 28, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Sat, 29 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 29, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 29, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Sun, 30 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 30, 23 - tzH, 15 - tzM, 2, 0));
 
     expect(toDate('30 Jan 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 0, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 0, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Feb 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 1, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 1, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Mar 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 2, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 2, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Apr 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 3, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 3, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 May 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 4, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 4, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Jun 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 5, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 5, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Jul 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 6, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 6, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Aug 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 7, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 7, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Oct 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 9, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 9, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Nov 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 10, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 10, 30, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('30 Dec 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 11, 30, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 11, 30, 23 - tzH, 15 - tzM, 2, 0));
 
     expect(toDate(' Tue, 5 Sep 2017 23:15:02 +0000'))
-      .to.eql(new Date(2017, 8, 5, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(2017, 8, 5, 23 - tzH, 15 - tzM, 2, 0));
     expect(toDate('Tue, 5 Sep 12017 23:15:02 +0000'))
-      .to.eql(new Date(12017, 8, 5, 23 - tzH, 15 - tzM, 2, 0));
+      .to.eql(newDate(12017, 8, 5, 23 - tzH, 15 - tzM, 2, 0));
   });
 
   it('Should return null if value is a illegal string', function() {
@@ -102,7 +103,7 @@ describe('fav.type.toDate["RFC2822"]', function() {
     expect(toDate(/a/g)).to.equal(null);
     expect(toDate(new RegExp('a', 'g'))).to.equal(null);
     expect(toDate(function() {})).to.equal(null);
-    expect(toDate(new Date())).to.equal(null);
+    expect(toDate(newDate())).to.equal(null);
     expect(toDate(new Error())).to.equal(null);
 
     if (typeof Symbol === 'function') {

@@ -4,12 +4,13 @@ var chai = require('chai');
 var expect = chai.expect;
 var fav = {}; fav.type = {}; fav.type.toDate = require('..');
 
+var newDate = fav.type.toDate;
 var toDate = fav.type.toDate['YYYYMMDD'];
 
 describe('fav.type.toDate["YYYYMMDD"]', function() {
 
   it('Should return a date object if value is normal', function() {
-    expect(toDate('20170923')).to.eql(new Date(2017, 8, 23));
+    expect(toDate('20170923')).to.eql(newDate(2017, 8, 23));
   });
 
   it('Should return null if value is a illegal string', function() {
@@ -35,7 +36,7 @@ describe('fav.type.toDate["YYYYMMDD"]', function() {
     expect(toDate(/a/g)).to.equal(null);
     expect(toDate(new RegExp('a', 'g'))).to.equal(null);
     expect(toDate(function() {})).to.equal(null);
-    expect(toDate(new Date())).to.equal(null);
+    expect(toDate(newDate())).to.equal(null);
     expect(toDate(new Error())).to.equal(null);
 
     if (typeof Symbol === 'function') {

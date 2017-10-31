@@ -4,17 +4,18 @@ var chai = require('chai');
 var expect = chai.expect;
 var fav = {}; fav.type = {}; fav.type.toDate = require('..');
 
+var newDate = fav.type.toDate;
 var toDate = fav.type.toDate['Y/M/D'];
 
 describe('fav.type.toDate["Y/M/D"]', function() {
 
   it('Should return a date object if value is normal', function() {
-    expect(toDate('2017/09/21')).to.eql(new Date(2017, 8, 21));
-    expect(toDate('123/4/5')).to.eql(new Date(123, 3, 5));
-    expect(toDate('-99/9/9')).to.eql(new Date(-99, 8, 9));
-    expect(toDate('+99/9/9')).to.eql(new Date(99, 8, 9));
-    expect(toDate('2017/13/21')).to.eql(new Date(2018, 0, 21));
-    expect(toDate('2017/09/31')).to.eql(new Date(2017, 9, 1));
+    expect(toDate('2017/09/21')).to.eql(newDate(2017, 8, 21));
+    expect(toDate('123/4/5')).to.eql(newDate(123, 3, 5));
+    expect(toDate('-99/9/9')).to.eql(newDate(-99, 8, 9));
+    expect(toDate('+99/9/9')).to.eql(newDate(99, 8, 9));
+    expect(toDate('2017/13/21')).to.eql(newDate(2018, 0, 21));
+    expect(toDate('2017/09/31')).to.eql(newDate(2017, 9, 1));
   });
 
   it('Should return null if value is a illegal string', function() {
@@ -45,7 +46,7 @@ describe('fav.type.toDate["Y/M/D"]', function() {
     expect(toDate(/a/g)).to.equal(null);
     expect(toDate(new RegExp('a', 'g'))).to.equal(null);
     expect(toDate(function() {})).to.equal(null);
-    expect(toDate(new Date())).to.equal(null);
+    expect(toDate(newDate())).to.equal(null);
     expect(toDate(new Error())).to.equal(null);
 
     if (typeof Symbol === 'function') {

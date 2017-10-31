@@ -1,5 +1,6 @@
 'use strict';
 
+var newDate = require('./lib/new-date');
 var fromHyphenedYmd = require('./lib/from-hyphened-ymd');
 var fromHyphenedYmdAndHms = require('./lib/from-hyphened-ymd-and-hms');
 var fromSlashedYmd = require('./lib/from-slashed-ymd');
@@ -12,7 +13,7 @@ var fromRfc2822 = require('./lib/from-rfc2822');
 var fromRfc3339 = require('./lib/from-rfc3339');
 var fromIso8601 = require('./lib/from-iso8601');
 
-var toDate = {};
+var toDate = newDate;
 
 Object.defineProperties(toDate, {
   'Y-M-D': { enumerable: true, value: fromHyphenedYmd },

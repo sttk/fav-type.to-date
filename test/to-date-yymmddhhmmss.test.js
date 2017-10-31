@@ -4,35 +4,36 @@ var chai = require('chai');
 var expect = chai.expect;
 var fav = {}; fav.type = {}; fav.type.toDate = require('..');
 
+var newDate = fav.type.toDate;
 var toDate = fav.type.toDate['YYMMDDHHmmss'];
 
 describe('fav.type.toDate["YYMMDDHHmmss"]', function() {
 
   it('Should return a date object if value is normal', function() {
-    var yyyy = new Date().getFullYear(),
+    var yyyy = newDate().getFullYear(),
         yy;
 
     for (var y = yyyy - 50; y < yyyy + 50; y++) {
       yy = String(yyyy).slice(-2);
       expect(toDate(yy + '0101000000'))
-        .to.eql(new Date(yyyy, 0, 1, 0, 0, 0));
+        .to.eql(newDate(yyyy, 0, 1, 0, 0, 0));
       expect(toDate(yy + '0615123030'))
-        .to.eql(new Date(yyyy, 5, 15, 12, 30, 30));
+        .to.eql(newDate(yyyy, 5, 15, 12, 30, 30));
       expect(toDate(yy + '1231235959'))
-        .to.eql(new Date(yyyy, 11, 31, 23, 59, 59));
+        .to.eql(newDate(yyyy, 11, 31, 23, 59, 59));
     }
 
     yy = String(yyyy + 49).slice(-2);
     expect(toDate(yy + '1231235959'))
-      .to.eql(new Date(yyyy + 49, 11, 31, 23, 59, 59));
+      .to.eql(newDate(yyyy + 49, 11, 31, 23, 59, 59));
     expect(toDate(yy + '1231235960'))
-      .to.eql(new Date(yyyy + 50, 0, 1, 0, 0, 0));
+      .to.eql(newDate(yyyy + 50, 0, 1, 0, 0, 0));
 
     yy = String(yyyy + 50).slice(-2);
     expect(toDate(yy + '0101000000'))
-      .to.eql(new Date(yyyy - 50, 0, 1, 0, 0, 0));
+      .to.eql(newDate(yyyy - 50, 0, 1, 0, 0, 0));
     expect(toDate(yy + '0100235959'))
-      .to.eql(new Date(yyyy - 51, 11,31, 23, 59, 59));
+      .to.eql(newDate(yyyy - 51, 11,31, 23, 59, 59));
 
     expect(toDate('000000000000')).to.not.equal(null);
     expect(toDate('999999999999')).to.not.equal(null);
@@ -64,7 +65,7 @@ describe('fav.type.toDate["YYMMDDHHmmss"]', function() {
     expect(toDate(/a/g)).to.equal(null);
     expect(toDate(new RegExp('a', 'g'))).to.equal(null);
     expect(toDate(function() {})).to.equal(null);
-    expect(toDate(new Date())).to.equal(null);
+    expect(toDate(newDate())).to.equal(null);
     expect(toDate(new Error())).to.equal(null);
 
     if (typeof Symbol === 'function') {

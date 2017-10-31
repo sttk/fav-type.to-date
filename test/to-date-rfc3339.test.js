@@ -4,9 +4,10 @@ var chai = require('chai');
 var expect = chai.expect;
 var fav = {}; fav.type = {}; fav.type.toDate = require('..');
 
+var newDate = fav.type.toDate;
 var toDate = fav.type.toDate.RFC3339;
 
-var tz = new Date().getTimezoneOffset();
+var tz = newDate().getTimezoneOffset();
 var tzM = tz % 60;
 var tzH = (tz - tzM) / 60;
 
@@ -14,25 +15,25 @@ describe('fav.type.toDate["RFC3339"]', function() {
 
   it('Should return a date object if value is normal', function() {
     expect(toDate('2017-09-26T23:37:51Z'))
-      .to.eql(new Date(2017, 8, 26, 23 - tzH, 37 - tzM, 51));
+      .to.eql(newDate(2017, 8, 26, 23 - tzH, 37 - tzM, 51));
     expect(toDate('2017-09-26T23:37:51+00:00'))
-      .to.eql(new Date(2017, 8, 26, 23 - tzH, 37 - tzM, 51));
+      .to.eql(newDate(2017, 8, 26, 23 - tzH, 37 - tzM, 51));
 
     expect(toDate('2017-09-27T08:37:51+09:00'))
-      .to.eql(new Date(2017, 8, 27, 8 - 9 - tzH, 37 + tzM, 51));
+      .to.eql(newDate(2017, 8, 27, 8 - 9 - tzH, 37 + tzM, 51));
     expect(toDate('2017-09-26T20:27:51-03:10'))
-      .to.eql(new Date(2017, 8, 26, 20 + 3 - tzH, 27 + 10 - tzM, 51));
+      .to.eql(newDate(2017, 8, 26, 20 + 3 - tzH, 27 + 10 - tzM, 51));
     expect(toDate('2017-09-24T19:59:51.123Z'))
-      .to.eql(new Date(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 123));
+      .to.eql(newDate(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 123));
 
     expect(toDate('2017-09-24T19:59:51.123+00:00'))
-      .to.eql(new Date(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 123));
+      .to.eql(newDate(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 123));
     expect(toDate('2017-09-24T19:59:51.1+00:00'))
-      .to.eql(new Date(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 100));
+      .to.eql(newDate(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 100));
     expect(toDate('2017-09-24T19:59:51.12+00:00'))
-      .to.eql(new Date(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 120));
+      .to.eql(newDate(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 120));
     expect(toDate('2017-09-24T19:59:51.1234+00:00'))
-      .to.eql(new Date(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 123));
+      .to.eql(newDate(2017, 8, 24, 19 - tzH, 59 - tzM, 51, 123));
   });
 
   it('Should return null if value is a illegal string', function() {
@@ -78,7 +79,7 @@ describe('fav.type.toDate["RFC3339"]', function() {
     expect(toDate(/a/g)).to.equal(null);
     expect(toDate(new RegExp('a', 'g'))).to.equal(null);
     expect(toDate(function() {})).to.equal(null);
-    expect(toDate(new Date())).to.equal(null);
+    expect(toDate(newDate())).to.equal(null);
     expect(toDate(new Error())).to.equal(null);
 
     if (typeof Symbol === 'function') {
