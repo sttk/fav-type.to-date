@@ -18,7 +18,7 @@ $ npm install --save @fav/type.to-date
 
 ## Usage
 
-For Node.js, when installing `@fav/type.to-date` from npm:
+For Node.js:
 
 ```js
 var toDate = require('@fav/type.to-date');
