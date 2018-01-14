@@ -1,6 +1,6 @@
 # [@fav/type.to-date][repo-url] [![NPM version][npm-img]][npm-url] [![MIT License][mit-img]][mit-url] [![Build Status][travis-img]][travis-url] [![Build Status][appveyor-img]][appveyor-url] [![Coverage status][coverage-img]][coverage-url]
 
-Convert a string in various date format to a date object.
+Converts a string in various date format to a date object.
 
 > "fav" is an abbreviation of "favorite" and also the acronym of "for all versions".
 > This package is intended to support all Node.js versions and many browsers as possible.
@@ -90,7 +90,7 @@ This function set provides functions supporting following date formats:
 
 #### <u>toDate\['Y-M-D'\](value) : Date</u>
 
-Convert a date format string separated by hyphens to a data object. 
+Converts a date format string separated by hyphens to a data object. 
 
 ##### Parameter:
 
@@ -109,7 +109,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate\['Y-M-D H:m:s'\](value) : Date</u>
 
-Convert a date-time format string separated by hyphens and colons to a data object. 
+Converts a date-time format string separated by hyphens and colons to a data object. 
 
 ##### Parameter:
 
@@ -128,7 +128,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate\['Y/M/D'\](value) : Date</u>
 
-Convert a date format string separated by slashes to a data object. 
+Converts a date format string separated by slashes to a data object. 
 
 ##### Parameter:
 
@@ -147,7 +147,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate\['Y/M/D H:m:s'\](value) : Date</u>
 
-Convert a date-time format string separated by slashes and colons to a data object. 
+Converts a date-time format string separated by slashes and colons to a data object. 
 
 ##### Parameter:
 
@@ -166,7 +166,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate.YYMMDD(value) : Date</u>
 
-Convert a date format string in fixed size to a data object.
+Converts a date format string in fixed size to a data object.
 
 ##### Parameter:
 
@@ -188,7 +188,7 @@ This format can represent a date within the range 100 years centered the current
 
 #### <u>toDate.YYMMDDHHmmss(value) : Date</u>
 
-Convert a date format string in fixed size to a data object.
+Converts a date format string in fixed size to a data object.
 
 ##### Parameter:
 
@@ -210,7 +210,7 @@ This format can represent a date within the range 100 years centered the current
 
 #### <u>toDate.YYYYMMDD(value) : Date</u>
 
-Convert a date format string in fixed size to a data object.
+Converts a date format string in fixed size to a data object.
 
 ##### Parameter:
 
@@ -229,7 +229,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate.YYYYMMDDHHmmss(value) : Date</u>
 
-Convert a date format string in fixed size to a data object.
+Converts a date format string in fixed size to a data object.
 
 ##### Parameter:
 
@@ -248,7 +248,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate.RFC2822(value) : Date</u>
 
-Convert a date format string according to RFC2822 to a data object.
+Converts a date format string according to RFC2822 to a data object.
 
 ##### Parameter:
 
@@ -267,7 +267,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate.RFC3339(value) : Date</u>
 
-Convert a date format string according to RFC3339 to a data object.
+Converts a date format string according to RFC3339 to a data object.
 
 ##### Parameter:
 
@@ -286,7 +286,7 @@ A `Date` object, or null if failing to convert.
 
 #### <u>toDate.ISO8601(value) : Date</u>
 
-Convert a date format string according to ISO8601 to a data object.
+Converts a date format string according to ISO8601 to a data object.
 
 There are many formats in ISO8601: basic/extended, calendar-date/ordinal-date/week-date and expanded/non-expanded, and this function supports all formats of them.
 
@@ -305,13 +305,13 @@ A `Date` object, or null if failing to convert.
 
 ## Checked                                                                      
 
-### Node.js (4〜8)
+### Node.js (4〜9)
 
-| Platform  |   4    |   5    |   6    |   7    |   8    |
-|:---------:|:------:|:------:|:------:|:------:|:------:|
-| macOS     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
-| Windows10 |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
-| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Platform  |   4    |   5    |   6    |   7    |   8    |   9    |
+|:---------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| macOS     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Windows10 |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
 
 ### io.js (1〜3)
 
