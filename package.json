@@ -43,11 +43,11 @@
   },
   "homepage": "https://github.com/sttk/fav-type.to-date#readme",
   "dependencies": {
-    "@fav/type.is-string": "^0.6.0",
-    "@fav/type.is-valid-date": "^0.8.0"
+    "@fav/type.is-string": "^1.0.0",
+    "@fav/type.is-valid-date": "^1.0.0"
   },
   "devDependencies": {
-    "@xslet/platform": "^0.1.5",
+    "@xslet/platform": "^0.2.0",
     "browserify": "^14.4.0",
     "chai": "^3.5.0",
     "coveralls": "^2.13.1",
