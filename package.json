@@ -1,6 +1,6 @@
 {
   "name": "@fav/type.to-date",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Convert a string in various date format to a date object.",
   "main": "index.js",
   "files": [

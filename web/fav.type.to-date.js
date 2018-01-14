@@ -45,7 +45,9 @@ function fromHyphenedYmdAndHms(text) {
     return null;
   }
 
+  /* eslint-disable max-len */
   var result = /^([\+\-]?[0-9]+)-([0-9]+)-([0-9]+)\s+([0-9]+):([0-9]+):([0-9]+)(\.[0-9]+){0,1}$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return null;
   }
@@ -158,7 +160,7 @@ function parseBasicZone(time, zone) {
   if (zone[0] !== 'Z') {
     var zSign = (zone[1] === '-') ? -1 : 1;
     var zHour = parseInt(zone[2], 10) * zSign;
-    var zMinute = zone[3] ? parseInt(zone[3], 10) * zSign : 0; 
+    var zMinute = zone[3] ? parseInt(zone[3], 10) * zSign : 0;
 
     time[0] -= zHour;
     time[1] -= zMinute;
@@ -175,7 +177,7 @@ function parseExtendedZone(time, zone) {
   if (zone[0] !== 'Z') {
     var zSign = (zone[1] === '-') ? -1 : 1;
     var zHour = parseInt(zone[2], 10) * zSign;
-    var zMinute = zone[3] ? parseInt(zone[3].slice(1), 10) * zSign : 0; 
+    var zMinute = zone[3] ? parseInt(zone[3].slice(1), 10) * zSign : 0;
 
     time[0] -= zHour;
     time[1] -= zMinute;
@@ -183,7 +185,9 @@ function parseExtendedZone(time, zone) {
 }
 
 function fromExtendedCalendarDate(text) {
+  /* eslint-disable max-len */
   var result = /^([\+\-][0-9]{4,}|[0-9]{4})-([0-9]{2})-([0-9]{2})(T([0-9]{2}):([0-9]{2}):([0-9]{2})(Z|([\+\-])([0-9]{2})(:[0-9]{2})?|))?$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return NaN;
   }
@@ -214,7 +218,9 @@ function fromExtendedCalendarDate(text) {
 }
 
 function fromExtendedOrdinalDate(text) {
+  /* eslint-disable max-len */
   var result = /^([\+\-][0-9]{4,}|[0-9]{4})-([0-9]{3})(T([0-9]{2}):([0-9]{2}):([0-9]{2})(Z|([\+\-])([0-9]{2})(:[0-9]{2})?|))?$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return NaN;
   }
@@ -244,7 +250,9 @@ function fromExtendedOrdinalDate(text) {
 }
 
 function fromExtendedWeekDate(text) {
+  /* eslint-disable max-len */
   var result = /^([\+\-][0-9]{4,}|[0-9]{4})-W([0-9]{2})-([0-9]{1})(T([0-9]{2}):([0-9]{2}):([0-9]{2})(Z|([\+\-])([0-9]{2})(:[0-9]{2})?|))?$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return NaN;
   }
@@ -278,7 +286,9 @@ function fromExtendedWeekDate(text) {
 }
 
 function fromBasicCalendarDate(text) {
+  /* eslint-disable max-len */
   var result = /^([\+\-][0-9]{4,}|[0-9]{4})([0-9]{2})([0-9]{2})(T([0-9]{2})([0-9]{2})([0-9]{2})(Z|([\+\-])([0-9]{2})([0-9]{2})?|))?$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return NaN;
   }
@@ -309,7 +319,9 @@ function fromBasicCalendarDate(text) {
 }
 
 function fromBasicOrdinalDate(text) {
+  /* eslint-disable max-len */
   var result = /^([\+\-][0-9]{4,}|[0-9]{4})([0-9]{3})(T([0-9]{2})([0-9]{2})([0-9]{2})(Z|([\+\-])([0-9]{2})([0-9]{2})?|))?$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return NaN;
   }
@@ -339,7 +351,9 @@ function fromBasicOrdinalDate(text) {
 }
 
 function fromBasicWeekDate(text) {
+  /* eslint-disable max-len */
   var result = /^([\+\-][0-9]{4,}|[0-9]{4})W([0-9]{2})([0-9]{1})(T([0-9]{2})([0-9]{2})([0-9]{2})(Z|([\+\-])([0-9]{2})([0-9]{2})?|))?$/.exec(text);
+  /* eslint-enable max-len */
   if (!result) {
     return NaN;
   }
@@ -385,7 +399,9 @@ function fromRfc2822(text) {
     return null;
   }
 
+  /* eslint-disable max-len */
   var result = /^\s*(Mon,\s*|Tue,\s*|Wed,\s*|Thu,\s*|Fri,\s*|Sat,\s*|Sun,\s*|)([0-9]{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+([0-9]{4,})\s+([0-9]{2}):([0-9]{2}):([0-9]{2})\s+([\+\-])([0-9]{2})([0-9]{2})\s*$/.exec(text);
+  /* eslint-enable max-len */
 
   if (!result) {
     return null;
@@ -445,7 +461,9 @@ function fromRfc3339(text) {
     return null;
   }
 
+  /* eslint-disable max-len */
   var result = /^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?(Z|([\+\-])([0-9]{2}):([0-9]{2}))$/.exec(text);
+  /* eslint-enable max-len */
 
   if (!result) {
     return null;
@@ -504,7 +522,9 @@ function fromHyphenedYmdAndHms(text) {
     return null;
   }
 
+  /* eslint-disable max-len */
   var result = /^([\+\-]?[0-9]+)\/([0-9]+)\/([0-9]+)\s+([0-9]+):([0-9]+):([0-9]+)(\.[0-9]+){0,1}$/.exec(text);
+  /* eslint-enable max-len */
 
   if (!result) {
     return null;
@@ -611,7 +631,9 @@ function fromYymmddhhmmss(text) {
     return null;
   }
 
+  /* eslint-disable max-len */
   var result = /^([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})$/.exec(text);
+  /* eslint-enable max-len */
 
   if (!result) {
     return null;
@@ -686,7 +708,9 @@ function fromYyyymmddhhmmss(text) {
     return null;
   }
 
+  /* eslint-disable max-len */
   var result = /^([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})$/.exec(text);
+  /* eslint-enable max-len */
 
   if (!result) {
     return null;
@@ -806,6 +830,15 @@ function isString(value) {
   return false;
 }
 
+function isNotString(value) {
+  return !isString(value);
+}
+
+Object.defineProperty(isString, 'not', {
+  enumerable: true,
+  value: isNotString,
+});
+
 module.exports = isString;
 
 },{}],15:[function(require,module,exports){
@@ -819,6 +852,15 @@ function isValidDate(value) {
   var time = value.getTime();
   return time === time;
 }
+
+function isNotValidDate(value) {
+  return !isValidDate(value);
+}
+
+Object.defineProperty(isValidDate, 'not', {
+  enumerable: true,
+  value: isNotValidDate,
+});
 
 module.exports = isValidDate;
 
